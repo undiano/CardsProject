@@ -119,8 +119,7 @@ public class VentanaCartas extends JFrame {
 		panel.add(saveDeck);
 		saveDeck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UtilsCards.guardarOActualizar();
-
+				UtilsCards.guardarOActualizar(list_1,numero,list);
 			}
 		});
 

@@ -78,21 +78,21 @@ public class UtilsCards {
 		numero.setText(Integer.toString(UtilsCards.contadorValor));
 	}
 
-	public static void guardarOActualizar() {
+	public static void guardarOActualizar(JList lista,JLabel numero,JList lista1) {
 		if (loadBaraja) {
 			int reply = JOptionPane.showConfirmDialog(null, "Quieres sobreEscribir la baraja?", "SobreEscribir",
 					JOptionPane.YES_NO_OPTION);
 			if (reply == JOptionPane.YES_OPTION) {
-				updateBaraja();
+				updateBaraja(lista,numero,lista1);
 			} else {
-				insertCards();
+				insertCards(lista,numero,lista1);
 			}
 		} else {
-			insertCards();
+			insertCards(lista,numero,lista1);
 		}
 	}
 
-	public static void insertCards() {
+	public static void insertCards(JList lista,JLabel numero,JList lista1) {
 		String DeckName = JOptionPane.showInputDialog("Introduce el nombre de la baraja: ");
 		Baraja b11 = new Baraja(DeckName, contadorValor, barajaList);
 		Gson gson = new Gson();
@@ -101,6 +101,14 @@ public class UtilsCards {
 		if (Connexio.insertMongo().insertOne(b11, userDoc)) {
 			JOptionPane.showMessageDialog(null, "Baraja insertada correctamente", "Insertar baraja",
 					JOptionPane.INFORMATION_MESSAGE);
+			
+			DefaultListModel listmodel=new DefaultListModel();
+		    listmodel.removeAllElements();
+		    lista.setModel(listmodel);
+		    contadorValor = 0;
+		    lista1.setModel(obtenerCartas());
+		    numero.setText("0");
+		    barajaList.clear();
 		} else {
 			JOptionPane.showMessageDialog(null, "Ya existe una baraja con ese nombre", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -200,7 +208,7 @@ public class UtilsCards {
 		return null;
 	}
 	
-	public static void updateBaraja() {
+	public static void updateBaraja(JList lista,JLabel numero, JList lista1) {
 		Baraja baraja = new Baraja(barajaCargada.getDeckName(), contadorValor, barajaList);
 		Gson gson = new Gson();
 		String JSON = gson.toJson(baraja);
@@ -208,5 +216,12 @@ public class UtilsCards {
 		Connexio.insertMongo().updateBaraja(baraja.getDeckName(), userDoc);
 		JOptionPane.showMessageDialog(null, "Baraja actualizada correctamente", "Insertar baraja",
 				JOptionPane.INFORMATION_MESSAGE);
+		DefaultListModel listmodel=new DefaultListModel();
+	    listmodel.removeAllElements();
+	    lista.setModel(listmodel);
+	    contadorValor = 0;
+	    lista1.setModel(obtenerCartas());
+	    numero.setText("0");
+	    barajaList.clear();
 	}
 }
