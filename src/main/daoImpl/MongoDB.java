@@ -34,8 +34,8 @@ public class MongoDB implements IMongoDB{
 	private void connectDatabase() {
 		connectionString = new MongoClientURI("mongodb://localhost:27017");
 		mongoClient = new MongoClient(connectionString);
-		database = mongoClient.getDatabase("dbDecks");
-		collection = database.getCollection("decks");
+		database = mongoClient.getDatabase("Decks");
+		collection = database.getCollection("deck");
 	}
 	
 	private void disconnect() {

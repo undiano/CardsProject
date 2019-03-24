@@ -41,25 +41,29 @@ public class UtilsCards {
 		UtilsCards.contadorValor = 0;
 		UtilsCards.barajaList.clear();
 		lista.setModel(UtilsCards.obtenerCartas());
+		ArrayList <Cards> cartasposibles = new ArrayList();
+		cartasposibles.clear();
 		do {
+			cartasposibles.clear();
 			for (Cards cards : UtilsCards.cardList) {
-				if (cards.getValue() < valorPequeno) {
-					valorPequeno = cards.getValue();
+				if (cards.getValue() <= (20 - contadorValor)) {
+					cartasposibles.add(cards);
 				}
 			}
-			System.out.println(valorPequeno);
-			random = (int) (Math.random() * UtilsCards.cardList.size());
-			UtilsCards.contadorValor = UtilsCards.contadorValor + UtilsCards.cardList.get(random).getValue();
-			if((valorPequeno + contadorValor)<=20){
+			if(cartasposibles.size() != 0) {
+				random = (int) (Math.random() * cartasposibles.size());
+				UtilsCards.contadorValor = UtilsCards.contadorValor + cartasposibles.get(random).getValue();
 				if (UtilsCards.contadorValor <= 20) {
-					UtilsCards.barajaList.add(UtilsCards.cardList.get(random));
-					UtilsCards.cardList.remove(random);
+						UtilsCards.barajaList.add(cartasposibles.get(random));
+						UtilsCards.cardList.remove(cartasposibles.get(random));
+				}else {
+					UtilsCards.contadorValor = UtilsCards.contadorValor - UtilsCards.cardList.get(random).getValue();
+					exit = false;
 				}
-			}else {
-				UtilsCards.contadorValor = UtilsCards.contadorValor - UtilsCards.cardList.get(random).getValue();
+			} else {
 				exit = false;
 			}
-
+			
 		} while (exit);
 		DefaultListModel modelo = new DefaultListModel<>();
 		DefaultListModel modelo2 = new DefaultListModel<>();
@@ -132,6 +136,9 @@ public class UtilsCards {
 			// TODO: handle exception
 			JOptionPane.showMessageDialog(null, "Todavia nos has cargado las cartas", "Error",
 					JOptionPane.ERROR_MESSAGE);
+		}catch (ArrayIndexOutOfBoundsException e1) {
+			JOptionPane.showMessageDialog(null, "Todavia nos seleccionado ninguna carta", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -161,6 +168,9 @@ public class UtilsCards {
 			// TODO: handle exception
 			JOptionPane.showMessageDialog(null, "Todavia nos has cargado las cartas", "Error",
 					JOptionPane.ERROR_MESSAGE);
+		}catch (ArrayIndexOutOfBoundsException e1) {
+			JOptionPane.showMessageDialog(null, "Todavia nos seleccionado ninguna carta", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -189,7 +199,7 @@ public class UtilsCards {
 		}
 		return null;
 	}
-
+	
 	public static void updateBaraja() {
 		Baraja baraja = new Baraja(barajaCargada.getDeckName(), contadorValor, barajaList);
 		Gson gson = new Gson();

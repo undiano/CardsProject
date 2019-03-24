@@ -29,7 +29,6 @@ public class VentanaCartas extends JFrame {
 	private static JList list_1;
 	public static JLabel numero;
 
-	
 	/**
 	 * Launch the application.
 	 */
@@ -45,6 +44,7 @@ public class VentanaCartas extends JFrame {
 			}
 		});
 	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -55,150 +55,105 @@ public class VentanaCartas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 625, 378);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		list = new JList();
 		list.setBounds(54, 49, 160, 230);
 		panel.add(list);
-		
+
 		list_1 = new JList();
 		list_1.setBounds(300, 49, 160, 230);
 		panel.add(list_1);
-		
+
 		JButton LoadCards = new JButton("Load Cards");
 		LoadCards.setBackground(Color.CYAN);
 		LoadCards.setFont(new Font("Broadway", Font.PLAIN, 15));
 		LoadCards.setBounds(54, 15, 160, 23);
 		panel.add(LoadCards);
-		LoadCards.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-			    list.setModel(UtilsCards.obtenerCartas());
-			  }
-			});
-		
+		LoadCards.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				list.setModel(UtilsCards.obtenerCartas());
+				
+			}
+		});
+
 		JButton rndDeck = new JButton("Rnd Deck");
 		rndDeck.setBackground(Color.CYAN);
 		rndDeck.setFont(new Font("Broadway", Font.PLAIN, 15));
 		rndDeck.setBounds(300, 15, 160, 23);
 		panel.add(rndDeck);
-		rndDeck.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  UtilsCards.randomDeck(list,list_1,numero);
-			  }
-//			   int valorPequeno = 20;
-//			   int random;
-//			   boolean exit = true;
-//			   UtilsCards.contadorValor = 0;
-//			   UtilsCards.barajaList.clear();
-//			   list.setModel(UtilsCards.obtenerCartas());
-//			   do {
-//				   for (Cards cards : UtilsCards.cardList) {
-//					   if(cards.getValue()<valorPequeno) {
-//						   valorPequeno = cards.getValue();
-//					   }
-//				   }
-//				   System.out.println(valorPequeno);
-//				   random = (int) (Math.random()*UtilsCards.cardList.size());
-//				   UtilsCards.contadorValor =  UtilsCards.contadorValor + UtilsCards.cardList.get(random).getValue();
-//				   if(UtilsCards.contadorValor <= 20 && ( 20 - UtilsCards.contadorValor) >= valorPequeno) {
-//					   UtilsCards.barajaList.add(UtilsCards.cardList.get(random));
-//					   UtilsCards.cardList.remove(random);
-//				   } else {
-//					   UtilsCards.contadorValor =  UtilsCards.contadorValor - UtilsCards.cardList.get(random).getValue();
-//					   exit = false;
-//				   }
-//				   
-//			   }while(exit);
-//			   DefaultListModel modelo = new DefaultListModel<>();
-//			   DefaultListModel modelo2 = new DefaultListModel<>();
-//			   for (Cards cards : UtilsCards.cardList) {
-//					modelo.addElement(cards.getName() + " Valor: " + cards.getValue());
-//				}
-//			  list.setModel(modelo);
-//			  for (Cards cards : UtilsCards.barajaList) {
-//					modelo2.addElement(cards.getName() + " Valor: " + cards.getValue());
-//				}
-//			  list_1.setModel(modelo2);
-//			  numero.setText(Integer.toString(UtilsCards.contadorValor));
-//			  }
-			});
-		
+		rndDeck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UtilsCards.randomDeck(list, list_1, numero);
+			}
+		});
+
 		JButton moverDercha = new JButton("-->");
 		moverDercha.setBackground(Color.CYAN);
 		moverDercha.setBounds(231, 132, 59, 23);
 		panel.add(moverDercha);
-		moverDercha.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  UtilsCards.moverDerecha(list, list_1);
-			  } 
-			});
-		
+		moverDercha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UtilsCards.moverDerecha(list, list_1);
+			}
+		});
+
 		JButton moverIzquierda = new JButton("<--");
 		moverIzquierda.setBackground(Color.CYAN);
 		moverIzquierda.setBounds(231, 179, 59, 23);
 		panel.add(moverIzquierda);
-		moverIzquierda.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  UtilsCards.moverIzquierda(list, list_1);
-			  }
-			});
-		
+		moverIzquierda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UtilsCards.moverIzquierda(list, list_1);
+			}
+		});
+
 		JButton saveDeck = new JButton("Save Deck");
 		saveDeck.setBackground(Color.CYAN);
 		saveDeck.setFont(new Font("Broadway", Font.PLAIN, 15));
 		saveDeck.setBounds(300, 291, 160, 23);
 		panel.add(saveDeck);
-		saveDeck.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  UtilsCards.guardarOActualizar();
-				 
-			  }
-			});
-		
+		saveDeck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UtilsCards.guardarOActualizar();
+
+			}
+		});
+
 		textField = new JTextField();
 		textField.setBounds(489, 110, 126, 20);
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JButton loadDeck = new JButton("Load Deck");
 		loadDeck.setBackground(Color.CYAN);
 		loadDeck.setFont(new Font("Broadway", Font.PLAIN, 15));
 		loadDeck.setBounds(489, 150, 126, 23);
 		panel.add(loadDeck);
-		
+
 		JLabel lblValorBaraja = new JLabel("Valor Baraja:");
 		lblValorBaraja.setBounds(489, 20, 86, 14);
 		panel.add(lblValorBaraja);
-		
+
 		numero = new JLabel("0");
 		numero.setBounds(585, 20, 16, 14);
 		panel.add(numero);
-		loadDeck.addActionListener(new ActionListener()
-		{
-			  public void actionPerformed(ActionEvent e)
-			  {
-				  try {
-					  list_1.setModel(UtilsCards.loadDeck(textField.getText()));
-					  numero.setText(Integer.toString(UtilsCards.contadorValor));
-				  }catch (Exception e1) {
+
+		loadDeck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					list_1.setModel(UtilsCards.loadDeck(textField.getText()));
+					numero.setText(Integer.toString(UtilsCards.contadorValor));
+					textField.setText("");
+				} catch (Exception e1) {
 					// TODO: handle exception
 				}
-				
-			  }
-			});
+
+			}
+		});
 	}
 }
